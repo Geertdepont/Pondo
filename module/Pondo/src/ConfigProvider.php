@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Pondo;
 
+use App\Handler\HomePageHandler;
+use App\Handler\HomePageHandlerFactory;
 use Pondo\Middleware\AddProductLinkMiddleware;
 use Pondo\Middleware\PingPongMiddleware;
 
@@ -38,10 +40,10 @@ class ConfigProvider
             'invokables' => [
                 PingPongMiddleware::class => PingPongMiddleware::class,
                 AddProductLinkMiddleware::class => AddProductLinkMiddleware::class,
-            ]
-//            'factories'  => [
-//                Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
-//            ],
+            ],
+            'factories'  => [
+                \Pondo\Middleware\HomePageHandler::class => \Pondo\Factory\Middleware\HomePageHandlerFactory::class,
+            ],
         ];
     }
 

@@ -33,7 +33,7 @@ use Zend\Expressive\MiddlewareFactory;
  * );
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
-//    $app->get('/', Pondo\Middleware\PingPongMiddleware::class, 'home');
+    $app->get('/', Pondo\Middleware\HomePageHandler::class, 'home');
     $app->get('/api/ping', Pondo\Middleware\PingPongMiddleware::class, 'api.ping');
     $app->post(
         '/productUrl',
