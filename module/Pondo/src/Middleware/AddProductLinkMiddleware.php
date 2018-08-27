@@ -2,7 +2,6 @@
 
 namespace Pondo\Middleware;
 
-use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -14,19 +13,6 @@ use Zend\Diactoros\Response\JsonResponse;
  */
 class AddProductLinkMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var EntityManager
-     */
-    protected $entityManager;
-
-    /**
-     * AddMiddleware constructor.
-     * @param EntityManager $entityManager
-     */
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
 
     /**
      * Process an incoming server request and return a response, optionally delegating

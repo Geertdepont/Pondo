@@ -35,12 +35,5 @@ use Zend\Expressive\MiddlewareFactory;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
 //    $app->get('/', Pondo\Middleware\PingPongMiddleware::class, 'home');
     $app->get('/api/ping', Pondo\Middleware\PingPongMiddleware::class, 'api.ping');
-    $app->post(
-        '/productUrl',
-        [
-            \Pondo\Middleware\JsonBodyParamsMiddleware::class,
-            \Pondo\Middleware\AddProductLinkMiddleware::class
-        ],
-        'product-url'
-    );
+    $app->post('/productUrl', \Pondo\Middleware\AddProductLinkMiddleware::class, 'product-url');
 };
