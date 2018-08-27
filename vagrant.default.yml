@@ -1,0 +1,19 @@
+---
+hosts:
+  mysql:
+    vagrant_ip: '192.168.110.10'
+    vagrant_cpus: 1
+    vagrant_memory: 1024 # in MB
+    vagrant_box: 'ubuntu/xenial64'
+    vagrant_hostname: mysql.pondo.local
+  web:
+      vagrant_ip: '192.168.110.20'
+      vagrant_cpus: 1
+      vagrant_memory: 1024 # in MB
+      vagrant_box: 'ubuntu/xenial64'
+      vagrant_hostname: web.pondo.local
+
+vagrant_install_plugins: true
+vagrant_plugins:
+  - name: vagrant-bindfs
+  - name: vagrant-hostmanager

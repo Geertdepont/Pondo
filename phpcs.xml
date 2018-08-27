@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<ruleset name="Pondo">
+    <description>The coding standard for PHP_CodeSniffer itself.</description>
+
+    <!-- 1. Array's -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+
+    <!-- 2. Code Analysis -->
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+
+    <!-- 3. Control structure -->
+    <rule ref="Generic.ControlStructures.InlineControlStructure"/>
+
+    <!-- 4. Files -->
+    <rule ref="Generic.Files.EndFileNewline"/>
+
+    <!-- 5. Formatting -->
+    <rule ref="Generic.Formatting.SpaceAfterCast"/>
+
+    <!-- 6. Functions -->
+    <rule ref="Generic.Functions.FunctionCallArgumentSpacing" />
+    <rule ref="Squiz.PHP.ForbiddenFunctions" />
+
+    <!-- 7. Commenting -->
+    <rule ref="Squiz.Commenting.ClassComment">
+        <!-- Do check tags: annotations for doctrine need those tags -->
+        <exclude name="Squiz.Commenting.ClassComment.TagNotAllowed"/>
+    </rule>
+    <rule ref="Squiz.Commenting.DocCommentAlignment" />
+    <rule ref="Squiz.Commenting.EmptyCatchComment" />
+    <rule ref="Squiz.Commenting.FunctionComment">
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
+        <exclude name="Squiz.Commenting.FunctionComment.EmptyThrows" />
+        <exclude name="Squiz.Commenting.FunctionComment.ThrowsNotCapital" />
+        <exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop" />
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop" />
+        <!-- No need to comment parameters, usually the name should say enough -->
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
+        <!-- Do not require a comment for @throws, the name of the exception should say enough -->
+        <exclude name="Squiz.Commenting.FunctionComment.EmptyThrows" />
+        <exclude name="Squiz.Commenting.FunctionComment.ThrowsNotCapital" />
+        <exclude name="Squiz.Commenting.FunctionComment.ThrowsNoFullStop" />
+        <!-- No need for a full stop in a function comment if we do not require them -->
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop" />
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
+    <rule ref="Squiz.Commenting.PostStatementComment" />
+    <rule ref="Squiz.Commenting.VariableComment">
+        <!-- Do check tags: annotations for doctrine need those tags -->
+        <exclude name="Squiz.Commenting.VariableComment.TagNotAllowed"/>
+        <exclude name="Squiz.Commenting.VariableComment.TagNotAllowed"/>
+    </rule>
+
+
+
+    <!-- 8. Whitespacing -->
+    <rule ref="Squiz.WhiteSpace.CastSpacing" />
+    <rule ref="Squiz.WhiteSpace.SemicolonSpacing" />
+    <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing" />
+    <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+        <properties>
+            <property name="ignoreBlankLines" value="false"/>
+        </properties>
+    </rule>
+
+    <!-- Strings -->
+    <rule ref="Squiz.Strings.DoubleQuoteUsage" />
+
+
+    <!-- inherit rules from: -->
+    <rule ref="PSR2">
+        <exclude ref="PSR2.ControlStructures.ElseIfDeclaration"/>
+    </rule>
+
+    <rule ref="Squiz.Strings.ConcatenationSpacing">
+        <properties>
+            <property name="spacing" value="1" />
+            <property name="ignoreNewlines" value="true" />
+        </properties>
+    </rule>
+
+
+    <!-- Do not imply a line length at the config files -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="160"/>
+            <property name="absoluteLineLimit" value="200"/>
+        </properties>
+    </rule>
+
+    <!--<file>module</file>-->
+    <!--<file>tests/backoffice</file>-->
+    <!--<file>tests/website</file>-->
+    <!--<file>tests/codeception</file>-->
+    <file>config</file>
+</ruleset>
+
+
