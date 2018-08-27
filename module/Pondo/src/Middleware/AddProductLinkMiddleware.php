@@ -1,28 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pondo\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
+use Zend\Expressive\Plates\PlatesRenderer;
+use Zend\Expressive\Router;
+use Zend\Expressive\Template;
+use Zend\Expressive\Twig\TwigRenderer;
+use Zend\Expressive\ZendView\ZendViewRenderer;
 
 /**
  * Class AddProductLinkMiddleware
+ * @package Pondo\Middleware
  */
-class AddProductLinkMiddleware implements MiddlewareInterface
+class AddProductLinkMiddleware implements RequestHandlerInterface
 {
+    private $containerName;
+
+    private $router;
+
+    private $template;
 
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * response creation to a handler.
-     *
-     * @param ServerRequestInterface  $request ServerRequestInterface.
-     * @param RequestHandlerInterface $handler RequestHandlerInterface.
-     * @return ResponseInterface
+     * AddProductLinkMiddleware constructor.
+     * @param Router\RouterInterface $router
+     * @param Template\TemplateRendererInterface|null $template
+     * @param string $containerName
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function __construct(
+        Router\RouterInterface $router,
+        Template\TemplateRendererInterface $template = null,
+        string $containerName
+    )
+    {
+        $this->router = $router;
+        $this->template = $template;
+        $this->containerName = $containerName;
+    }
+
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $data = $request->getParsedBody();
         $errors = $this->validateInput($data);
@@ -52,4 +74,6 @@ class AddProductLinkMiddleware implements MiddlewareInterface
 
         return $errors;
     }
+
+
 }

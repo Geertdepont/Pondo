@@ -2,10 +2,10 @@
 
 namespace Pondo\Factory\Middleware;
 
-use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
 use Interop\Container\Exception\ContainerException;
-use Pondo\Middleware\AddProductLinkMiddleware;
+use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
+use Zend\Expressive\Helper\BodyParams\JsonStrategy;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -30,9 +30,11 @@ class PingPongMiddlewareFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new AddProductLinkMiddleware(
-            $container->get(EntityManager::class)
-        );
+        $bodyParamsHelper = new BodyParamsMiddleware();
+        $bodyParamsHelper->clearStrategies();
+        $bodyParamsHelper->addStrategy(new JsonStrategy());
+
+        return $bodyParamsHelper;
     }
     // phpcs:enable
 }
